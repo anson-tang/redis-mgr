@@ -21,8 +21,11 @@ class MultiThreadedHTTPServer(ThreadingMixIn, HTTPServer):
     pass
 
 class WebServer():
-    def web_server(self, port=8008):
-        server_address = ('', port)
+    '''
+    please use scheduler instead.
+    '''
+    def _web_server(self, port=8008):
+        server_address = ('', int(port))
         handler = CGIHTTPServer.CGIHTTPRequestHandler
         cgipath = os.path.join(PWD, '../cgi')
         handler.cgi_directories = ['/cgi', cgipath]

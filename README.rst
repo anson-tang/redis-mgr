@@ -50,7 +50,7 @@ try it
     $ ./bin/deploy.py cluster0 -h
     $ ./bin/deploy.py cluster0 deploy
     $ ./bin/deploy.py cluster0 start
-    $ ./bin/deploy.py cluster0 scheduler  (run this in screen or somehow on background)
+    $ ./bin/deploy.py cluster0 scheduler --web_port 8008 (run this in screen or somehow on background)
 
 monitor pages
 -------------

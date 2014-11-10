@@ -450,7 +450,7 @@ class Monitor():
                 logging.exception(e)
             time.sleep(5)
 
-    def scheduler(self, rdb_hour=8):
+    def scheduler(self, rdb_hour = 8):
         '''
         start following threads:
             - failover
@@ -458,8 +458,9 @@ class Monitor():
             - cron of rdb
             - graph web server at default port
         '''
+        web_port = self.cmdline.web_port
         thread.start_new_thread(self.failover, ())
-        thread.start_new_thread(self.web_server, ())
+        thread.start_new_thread(self._web_server, (int(web_port), ))
         #thread.start_new_thread(self._supervisor, ())                      #this can not work with reconfigproxy
 
         cron = crontab.Cron()

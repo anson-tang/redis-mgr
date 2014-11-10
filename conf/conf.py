@@ -27,7 +27,6 @@ BINARYS = {
     'REDIS_CLI'           : '_binaries/redis-cli',
     'REDIS_SENTINEL_BINS' : '_binaries/redis-sentinel',
     'NUTCRACKER_BINS'     : '_binaries/nutcracker',
-    #'NUTCRACKER_BINS'     : '/home/ning/idning-github/twemproxy/src/nutcracker',
 }#TODO: check it
 
 BINARYS['MON_BINS'] = '_binaries/mon';
@@ -39,16 +38,20 @@ RDB_SLEEP_TIME = 1
 
 #optional
 REDIS_MONITOR_EXTRA = {
-    'used_cpu_user':              (0, 50),
+    'aof_last_rewrite_time_sec':  (0, 1000),
+    'rdb_last_bgsave_time_sec':   (-1, 1000),
+    'latest_fork_usec':           (0, 500*1000), #500ms
+    'used_memory_peak' :          (0, 8*(2**30)),
+    'used_memory' :               (0, 4.6*(2**30)),
+    '_slowlog_per_sec' :          (0, 1),
 }
 
-#optional
 NUTCRACKER_MONITOR_EXTRA = {
-    'client_connections':  (0, 10),
-    "forward_error_INC":   (0, 1000),  # in every minute
-    "client_err_INC":      (0, 1000),  # in every minute
-    'in_queue':            (0, 10),
-    'out_queue':           (0, 10),
+    'client_connections':  (0, 100000),
+    "forward_error_INC":   (0, 1000),   # in every minute
+    "client_err_INC":      (0, 1000),   # in every minute
+    'in_queue':            (0, 1000),
+    'out_queue':           (0, 1000),
 }
 
 cluster0 = {
@@ -56,7 +59,7 @@ cluster0 = {
     'user': 'ning',
     'REDIS_MONITOR_EXTRA': {
         'used_cpu_user':              (0, 1),
-        '_slowlog_per_sec':           (0, 1),
+        '_slowlog_per_sec':           (0, 10),
     },
     'sentinel':[
         ('127.0.0.5:29001', '/tmp/r/sentinel-29001'),
